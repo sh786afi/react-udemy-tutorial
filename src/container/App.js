@@ -3,6 +3,10 @@ import classes from "./App.module.css";
 import Persons from "../component/Persons/Persons";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("[App.js]Constructor");
+  }
   state = {
     persons: [
       { id: "1fas", name: "Max", age: 28 },
@@ -12,6 +16,13 @@ class App extends Component {
     otherState: "some other value",
     showperson: false
   };
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js] getDerivedStateFromProps", props);
+    return state;
+  }
+  componentDidMount() {
+    console.log("[App.js] Component Did mount");
+  }
 
   switchNameHandler = newName => {
     // console.log('Was clicked!');
@@ -49,6 +60,8 @@ class App extends Component {
   };
 
   render() {
+    console.log("[App.js] render");
+
     const style = {
       backgroundColor: "white",
       font: "inherit",
@@ -69,7 +82,7 @@ class App extends Component {
       );
     }
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
         <button style={style} onClick={this.togglePersonHandler}>
